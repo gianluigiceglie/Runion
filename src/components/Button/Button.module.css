@@ -1,0 +1,140 @@
+/*
+ * Button — mirrors Figma <Button> (Runion).
+ * Sizes:   Large 56 (pad 16, icon 24, body-md/semi-bold) · Medium 48 (pad 12, icon 20) · Small 30 (pad 4/8, icon 20, body-sm/semi-bold)
+ * Shape:   pill (rd-80), gap sp-8
+ * Variant colours come from data-color (--c / --c-hover / --c-pressed, see styles/base.css).
+ * Outlines are drawn with inset box-shadow so a 2px stroke never changes the button size.
+ */
+.root {
+  --icon: 20px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sizes-spacing-sp-8);
+  border: 0;
+  border-radius: var(--sizes-radius-rd-80);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+  font-weight: var(--font-weight-semi-bold);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
+}
+
+.root:focus-visible {
+  /* Figma focus ring: 2px stroke, 2px gap around the button */
+  outline: var(--sizes-border-br-2) solid var(--c);
+  outline-offset: var(--sizes-spacing-sp-2);
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  width: var(--icon);
+  height: var(--icon);
+}
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.label {
+  display: inline-block;
+}
+
+/* ---- sizes ---- */
+.large {
+  --icon: 24px;
+  padding: var(--sizes-spacing-sp-16);
+}
+.medium {
+  padding: var(--sizes-spacing-sp-12);
+}
+.small {
+  padding: var(--sizes-spacing-sp-4) var(--sizes-spacing-sp-8);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* ---- solid ---- */
+.solid {
+  background: var(--c);
+  color: var(--color-foreground-primary-inverse);
+}
+.solid:hover {
+  background: var(--c-hover);
+}
+.solid:active {
+  background: var(--c-pressed);
+}
+
+/* ---- outlined ---- */
+.outlined {
+  background: var(--color-background-primary-default);
+  color: var(--c);
+  box-shadow: inset 0 0 0 var(--sizes-border-br-2) var(--c);
+}
+.outlined:hover {
+  background: var(--color-background-primary-hover);
+}
+.outlined:active {
+  background: var(--color-background-primary-pressed);
+}
+.outlined:focus-visible:hover {
+  box-shadow: inset 0 0 0 var(--sizes-border-br-2) var(--c-hover);
+  outline-color: var(--c-hover);
+}
+
+/* ---- ghost ---- */
+.ghost {
+  background: transparent;
+  color: var(--c);
+}
+.ghost:hover {
+  background: var(--color-background-primary-hover);
+}
+.ghost:active {
+  background: var(--color-background-primary-pressed);
+}
+
+/* ---- disabled ---- */
+.root:disabled {
+  cursor: not-allowed;
+}
+.solid:disabled,
+.outlined:disabled {
+  background: var(--color-status-disabled-bg);
+  color: var(--color-status-disabled-on-solid);
+}
+.outlined:disabled {
+  box-shadow: inset 0 0 0 var(--sizes-border-br-2) var(--color-status-disabled-on-solid);
+}
+.ghost:disabled {
+  background: transparent;
+  color: var(--color-status-disabled-on-transparent);
+}
+
+/* ---- loading: keeps the enabled colours, ignores hover/press ---- */
+.loading {
+  cursor: progress;
+}
+.loading.solid {
+  background: var(--c);
+}
+.loading.outlined {
+  background: var(--color-background-primary-default);
+}
+.loading.ghost {
+  background: transparent;
+}
+
+.spin {
+  animation: runion-spin 1s linear infinite;
+}

@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Runion Foundations</title>
+<meta name="description" content="Generated preview of Runion design tokens: colour, typography, spacing, radius, borders and effects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<style>
+  /* Preview chrome only — built from the tokens themselves */
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--color-background-primary-default, #fff); color: var(--color-foreground-primary-default, #0f172a);
+         font-family: var(--font-family-primary, system-ui, sans-serif); font-size: 16px; line-height: 1.5; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px 80px; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--color-background-primary-translucent);
+           backdrop-filter: blur(var(--blur-glass-uniform-lg, 16px)); -webkit-backdrop-filter: blur(var(--blur-glass-uniform-lg, 16px));
+           border-bottom: 1px solid var(--color-background-primary-hover); }
+  .bar { max-width: 1120px; margin: 0 auto; padding: 12px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .bar h1 { margin: 0; font-size: 18px; font-weight: 600; flex: 1 1 auto; }
+  .bar nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  .bar nav a { color: var(--color-foreground-primary-muted); text-decoration: none; font-size: 14px; padding: 4px 8px; border-radius: var(--sizes-radius-rd-8); }
+  .bar nav a:hover { background: var(--color-background-primary-hover); color: var(--color-foreground-primary-default); }
+  .seg { display: inline-flex; border: 1px solid var(--color-border-primary-default); border-radius: var(--sizes-radius-rd-8); overflow: hidden; }
+  .seg button { font: inherit; font-size: 13px; padding: 4px 10px; border: 0; background: transparent; color: inherit; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--color-brand-primary-default); color: var(--color-foreground-primary-inverse); }
+  .seg button:focus-visible, .bar nav a:focus-visible { outline: 2px solid var(--color-brand-primary-default); outline-offset: 2px; }
+  section { padding-top: 48px; scroll-margin-top: 64px; }
+  section > h2 { margin: 0 0 4px; }
+  .lede { margin: 0 0 24px; color: var(--color-foreground-primary-muted); }
+  .eyebrow { margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-foreground-primary-muted); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+  .meta { color: var(--color-foreground-primary-muted); font-size: 14px; margin: 4px 0 0; }
+  .flag { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; font-size: 11px; font-weight: 700;
+          background: var(--color-status-error-default); color: #fff; vertical-align: 1px; margin-left: 4px; }
+
+  /* issues */
+  .issues { display: grid; gap: 12px; }
+  .issue { border: 1px solid var(--color-background-primary-high-contrast); border-left-width: 4px; border-radius: var(--sizes-radius-rd-8); padding: 12px 16px; }
+  .issue.error { border-left-color: var(--color-status-error-default); }
+  .issue.warn { border-left-color: var(--color-status-warning-default); }
+  .issue.info { border-left-color: var(--color-status-info-default); }
+  .issue h3 { margin: 0; font-size: 16px; }
+  .issue p { margin: 4px 0 0; color: var(--color-foreground-primary-muted); font-size: 14px; }
+  .issue ul { margin: 8px 0 0; padding-left: 18px; }
+  .issue li { font-size: 13px; }
+
+  /* palette */
+  .scale { margin-bottom: 24px; }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+  .swatch { border: 1px solid var(--color-background-primary-hover); border-radius: var(--sizes-radius-rd-8); overflow: hidden; }
+  .swatch .c { height: 56px; }
+  .swatch .l { padding: 6px 8px; }
+  .swatch .l b { display: block; font-size: 13px; font-weight: 600; }
+
+  /* semantic */
+  .themes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; }
+  .panel { background: var(--color-background-primary-default); color: var(--color-foreground-primary-default);
+           border: 1px solid var(--color-background-primary-high-contrast); border-radius: var(--sizes-radius-rd-12); padding: 16px; }
+  .panel h3 { margin: 0 0 12px; }
+  .sem-group { margin-bottom: 16px; }
+  .sem-row { display: grid; grid-template-columns: 32px 1fr auto; gap: 10px; align-items: center; padding: 6px 0;
+             border-top: 1px solid var(--color-background-primary-hover); }
+  .sem-name { font-size: 13px; overflow-wrap: anywhere; }
+  .sem-val { text-align: right; color: var(--color-foreground-primary-muted); }
+  .sem-val b { color: var(--color-foreground-primary-default); font-weight: 600; }
+  .chip { width: 32px; height: 32px; border-radius: var(--sizes-radius-rd-8); overflow: hidden; border: 1px solid var(--color-background-primary-high-contrast); }
+  .chip span { display: block; width: 100%; height: 100%; }
+  .check { background: repeating-conic-gradient(#cbd5e1 0 25%, #fff 0 50%) 0 0 / 10px 10px; }
+
+  /* type */
+  .type-row { display: grid; grid-template-columns: minmax(160px, 220px) 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--color-background-primary-hover); align-items: baseline; }
+  .type-row .sample { margin: 0; overflow-wrap: anywhere; }
+  @media (max-width: 640px) { .type-row { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* sizes */
+  .size-row { display: grid; grid-template-columns: minmax(150px, 200px) 56px 1fr; gap: 12px; align-items: center; padding: 6px 0; }
+  .size-row .bar-fill { height: 16px; background: var(--color-brand-primary-default); border-radius: 2px; min-width: 1px; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 12px; }
+  .tile { text-align: center; }
+  .tile .shape { height: 96px; background: var(--color-status-info-bg); border: 1px solid var(--color-status-info-default); margin-bottom: 6px; }
+  .tile .bshape { height: 64px; border-style: solid; border-color: var(--color-foreground-primary-default); border-radius: var(--sizes-radius-rd-8); margin-bottom: 6px; }
+
+  /* effects */
+  .glass-stage { position: relative; border-radius: var(--sizes-radius-rd-12); padding: 24px; overflow: hidden;
+                 background: radial-gradient(circle at 20% 30%, var(--color-orange-400) 0 14%, transparent 15%),
+                             radial-gradient(circle at 70% 60%, var(--color-stormy-teal-400) 0 18%, transparent 19%),
+                             repeating-linear-gradient(45deg, var(--color-deep-space-blue-500) 0 12px, var(--color-blue-300) 12px 24px); }
+  .glass-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+  .glass { position: relative; isolation: isolate; padding: 16px; min-height: 120px; border-radius: var(--sizes-radius-rd-12); overflow: hidden;
+           background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.5); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+  .glass-bg { position: absolute; inset: 0; z-index: -1; }
+  .glass b { display: block; font-size: 13px; overflow-wrap: anywhere; }
+  footer { margin-top: 64px; color: var(--color-foreground-primary-muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <h1>Runion foundations</h1>
+    <nav aria-label="Sections">
+      <a href="#issues">Issues</a><a href="#palette">Palette</a><a href="#semantic">Semantic</a><a href="#type">Type</a>
+      <a href="#spacing">Spacing</a><a href="#radius">Radius</a><a href="#border">Border</a><a href="#effects">Effects</a>
+    </nav>
+    <div class="seg" role="group" aria-label="Theme">
+      <button type="button" data-set="auto" aria-pressed="true">Auto</button>
+      <button type="button" data-set="light" aria-pressed="false">Light</button>
+      <button type="button" data-set="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <p class="meta">Generated from Figma file <b>Runion</b>, exported 2026-11-12. Mirrors Figma as-is.
+    221 tokens · 19 text styles · 10 effects.</p>
+
+  <section id="issues">
+    <h2 class="text-h3">Issues found in Figma</h2>
+    <p class="lede">Detected automatically on every build. Fix them in Figma, re-export, and they disappear from this list.
+      Tokens marked <span class="flag">!</span> below are affected.</p>
+    <div class="issues">
+      
+      <div class="issue info">
+        <h3>Skipped non-token variables <span class="mono">· info</span></h3>
+        <p>String variables that are not font family/weight are not exported to CSS.</p>
+        <ul><li class="mono">alias/String-text = &quot;&lt;AvatarGroup&gt;&quot;</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="palette">
+    <h2 class="text-h3">Palette</h2>
+    <p class="lede">Raw colours from the <span class="mono">base</span> collection. Use semantic tokens in components, not these.</p>
+    
+    <div class="scale">
+      <p class="eyebrow">color/deep-space-blue</p>
+      <div class="swatches">
+        
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-100)"></div>
+          <div class="l"><b>100</b><span class="mono">#d3d5da</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-200)"></div>
+          <div class="l"><b>200</b><span class="mono">#a6acb5</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-300)"></div>
+          <div class="l"><b>300</b><span class="mono">#7a828f</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-400)"></div>
+          <div class="l"><b>400</b><span class="mono">#4d596a</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-500)"></div>
+          <div class="l"><b>500</b><span class="mono">#212f45</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-600)"></div>
+          <div class="l"><b>600</b><span class="mono">#1a2637</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-700)"></div>
+          <div class="l"><b>700</b><span class="mono">#141c29</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-800)"></div>
+          <div class="l"><b>800</b><span class="mono">#0d131c</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-deep-space-blue-900)"></div>
+          <div class="l"><b>900</b><span class="mono">#0a0e15</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scale">
+      <p class="eyebrow">color/stormy-teal</p>
+      <div class="swatches">
+        
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-100)"></div>
+          <div class="l"><b>100</b><span class="mono">#cce0e0</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-200)"></div>
+          <div class="l"><b>200</b><span class="mono">#99c1c2</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-300)"></div>
+          <div class="l"><b>300</b><span class="mono">#66a2a3</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-400)"></div>
+          <div class="l"><b>400</b><span class="mono">#338385</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-500)"></div>
+          <div class="l"><b>500</b><span class="mono">#006466</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-600)"></div>
+          <div class="l"><b>600</b><span class="mono">#005052</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-700)"></div>
+          <div class="l"><b>700</b><span class="mono">#003c3d</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-800)"></div>
+          <div class="l"><b>800</b><span class="mono">#002829</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-stormy-teal-900)"></div>
+          <div class="l"><b>900</b><span class="mono">#001e1f</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scale">
+      <p class="eyebrow">color/orange</p>
+      <div class="swatches">
+        
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-100)"></div>
+          <div class="l"><b>100</b><span class="mono">#f7e4cd</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-200)"></div>
+          <div class="l"><b>200</b><span class="mono">#f0c99b</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-300)"></div>
+          <div class="l"><b>300</b><span class="mono">#e8ad6a</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-400)"></div>
+          <div class="l"><b>400</b><span class="mono">#e19238</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-500)"></div>
+          <div class="l"><b>500</b><span class="mono">#d97706</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-600)"></div>
+          <div class="l"><b>600</b><span class="mono">#ae5f05</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-700)"></div>
+          <div class="l"><b>700</b><span class="mono">#824704</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-800)"></div>
+          <div class="l"><b>800</b><span class="mono">#573002</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-orange-900)"></div>
+          <div class="l"><b>900</b><span class="mono">#412402</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scale">
+      <p class="eyebrow">color/neutral</p>
+      <div class="swatches">
+        
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-white)"></div>
+          <div class="l"><b>white</b><span class="mono">#ffffff</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-100)"></div>
+          <div class="l"><b>100</b><span class="mono">#f1f5f9</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-200)"></div>
+          <div class="l"><b>200</b><span class="mono">#e2e8f0</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-300)"></div>
+          <div class="l"><b>300</b><span class="mono">#cbd5e1</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-400)"></div>
+          <div class="l"><b>400</b><span class="mono">#94a3b8</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-500)"></div>
+          <div class="l"><b>500</b><span class="mono">#64748b</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-600)"></div>
+          <div class="l"><b>600</b><span class="mono">#475569</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-700)"></div>
+          <div class="l"><b>700</b><span class="mono">#334155</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-800)"></div>
+          <div class="l"><b>800</b><span class="mono">#1e293b</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-900)"></div>
+          <div class="l"><b>900</b><span class="mono">#0f172a</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-neutral-black)"></div>
+          <div class="l"><b>black</b><span class="mono">#000000</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scale">
+      <p class="eyebrow">color/red</p>
+      <div class="swatches">
+        
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-100)"></div>
+          <div class="l"><b>100</b><span class="mono">#f1d1d1</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-200)"></div>
+          <div class="l"><b>200</b><span class="mono">#e3a3a4</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-300)"></div>
+          <div class="l"><b>300</b><span class="mono">#d67476</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-400)"></div>
+          <div class="l"><b>400</b><span class="mono">#c84649</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-500)"></div>
+          <div class="l"><b>500</b><span class="mono">#ba181b</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-600)"></div>
+          <div class="l"><b>600</b><span class="mono">#951316</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-700)"></div>
+          <div class="l"><b>700</b><span class="mono">#700e10</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-800)"></div>
+          <div class="l"><b>800</b><span class="mono">#4a0a0b</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-red-900)"></div>
+          <div class="l"><b>900</b><span class="mono">#380708</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scale">
+      <p class="eyebrow">color/green</p>
+      <div class="swatches">
+        
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-100)"></div>
+          <div class="l"><b>100</b><span class="mono">#d5e1dc</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-200)"></div>
+          <div class="l"><b>200</b><span class="mono">#abc3b9</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-300)"></div>
+          <div class="l"><b>300</b><span class="mono">#81a695</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-400)"></div>
+          <div class="l"><b>400</b><span class="mono">#578872</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-500)"></div>
+          <div class="l"><b>500</b><span class="mono">#2d6a4f</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-600)"></div>
+          <div class="l"><b>600</b><span class="mono">#24553f</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-700)"></div>
+          <div class="l"><b>700</b><span class="mono">#1b402f</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-800)"></div>
+          <div class="l"><b>800</b><span class="mono">#122a20</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-green-900)"></div>
+          <div class="l"><b>900</b><span class="mono">#0e2018</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="scale">
+      <p class="eyebrow">color/blue</p>
+      <div class="swatches">
+        
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-100)"></div>
+          <div class="l"><b>100</b><span class="mono">#cce4f0</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-200)"></div>
+          <div class="l"><b>200</b><span class="mono">#99c9e2</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-300)"></div>
+          <div class="l"><b>300</b><span class="mono">#66add3</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-400)"></div>
+          <div class="l"><b>400</b><span class="mono">#3392c5</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-500)"></div>
+          <div class="l"><b>500</b><span class="mono">#0077b6</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-600)"></div>
+          <div class="l"><b>600</b><span class="mono">#005f92</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-700)"></div>
+          <div class="l"><b>700</b><span class="mono">#00476d</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-800)"></div>
+          <div class="l"><b>800</b><span class="mono">#003049</span></div>
+        </div>
+        <div class="swatch">
+          <div class="c" style="background:var(--color-blue-900)"></div>
+          <div class="l"><b>900</b><span class="mono">#002437</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="semantic">
+    <h2 class="text-h3">Semantic colours</h2>
+    <p class="lede">The <span class="mono">alias</span> collection, shown in both modes side by side. Each row: reference → resolved value.</p>
+    <div class="themes">
+      
+  <div class="panel" data-theme="light">
+    <h3 class="text-body-md-semi-bold">Light-mode</h3>
+    
+    <div class="sem-group">
+      <p class="eyebrow">plain</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-white)"></span></span>
+        <span class="sem-name">color/white</span>
+        <span class="sem-val mono">color/neutral/white<br><b>#ffffff</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-100)"></span></span>
+        <span class="sem-name">color/100</span>
+        <span class="sem-val mono">color/neutral/100<br><b>#f1f5f9</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-200)"></span></span>
+        <span class="sem-name">color/200</span>
+        <span class="sem-val mono">color/neutral/200<br><b>#e2e8f0</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-300)"></span></span>
+        <span class="sem-name">color/300</span>
+        <span class="sem-val mono">color/neutral/300<br><b>#cbd5e1</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-400)"></span></span>
+        <span class="sem-name">color/400</span>
+        <span class="sem-val mono">color/neutral/400<br><b>#94a3b8</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-500)"></span></span>
+        <span class="sem-name">color/500</span>
+        <span class="sem-val mono">color/neutral/500<br><b>#64748b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-600)"></span></span>
+        <span class="sem-name">color/600</span>
+        <span class="sem-val mono">color/neutral/600<br><b>#475569</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-700)"></span></span>
+        <span class="sem-name">color/700</span>
+        <span class="sem-val mono">color/neutral/700<br><b>#334155</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-800)"></span></span>
+        <span class="sem-name">color/800</span>
+        <span class="sem-val mono">color/neutral/800<br><b>#1e293b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-900)"></span></span>
+        <span class="sem-name">color/900</span>
+        <span class="sem-val mono">color/neutral/900<br><b>#0f172a</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-black)"></span></span>
+        <span class="sem-name">color/black</span>
+        <span class="sem-val mono">color/neutral/black<br><b>#000000</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">foreground</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-primary-default)"></span></span>
+        <span class="sem-name">color/foreground/primary/default</span>
+        <span class="sem-val mono">color/neutral/900<br><b>#0f172a</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-primary-inverse)"></span></span>
+        <span class="sem-name">color/foreground/primary/inverse</span>
+        <span class="sem-val mono">color/neutral/100<br><b>#f1f5f9</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-primary-muted)"></span></span>
+        <span class="sem-name">color/foreground/primary/muted</span>
+        <span class="sem-val mono">color/neutral/500<br><b>#64748b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-link-default)"></span></span>
+        <span class="sem-name">color/foreground/link/default</span>
+        <span class="sem-val mono">color/deep-space-blue/400<br><b>#4d596a</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-link-hover)"></span></span>
+        <span class="sem-name">color/foreground/link/hover</span>
+        <span class="sem-val mono">color/deep-space-blue/500<br><b>#212f45</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-link-pressed)"></span></span>
+        <span class="sem-name">color/foreground/link/pressed</span>
+        <span class="sem-val mono">color/deep-space-blue/600<br><b>#1a2637</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">border</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-border-primary-default)"></span></span>
+        <span class="sem-name">color/border/primary/default</span>
+        <span class="sem-val mono">color/neutral/500<br><b>#64748b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-border-primary-hover)"></span></span>
+        <span class="sem-name">color/border/primary/hover</span>
+        <span class="sem-val mono">color/neutral/700<br><b>#334155</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-border-primary-xhigh)"></span></span>
+        <span class="sem-name">color/border/primary/xhigh</span>
+        <span class="sem-val mono">color/neutral/800<br><b>#1e293b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-border-primary-contrast)"></span></span>
+        <span class="sem-name">color/border/primary/contrast</span>
+        <span class="sem-val mono">#00000000<br><b>#00000000</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">brand</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-primary-default)"></span></span>
+        <span class="sem-name">color/brand/primary/default</span>
+        <span class="sem-val mono">color/stormy-teal/500<br><b>#006466</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-primary-hover)"></span></span>
+        <span class="sem-name">color/brand/primary/hover</span>
+        <span class="sem-val mono">color/stormy-teal/600<br><b>#005052</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-primary-pressed)"></span></span>
+        <span class="sem-name">color/brand/primary/pressed</span>
+        <span class="sem-val mono">color/stormy-teal/700<br><b>#003c3d</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-secondary-default)"></span></span>
+        <span class="sem-name">color/brand/secondary/default</span>
+        <span class="sem-val mono">color/deep-space-blue/500<br><b>#212f45</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-secondary-hover)"></span></span>
+        <span class="sem-name">color/brand/secondary/hover</span>
+        <span class="sem-val mono">color/deep-space-blue/600<br><b>#1a2637</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-secondary-pressed)"></span></span>
+        <span class="sem-name">color/brand/secondary/pressed</span>
+        <span class="sem-val mono">color/deep-space-blue/700<br><b>#141c29</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">status</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-error-bg)"></span></span>
+        <span class="sem-name">color/status/error/bg</span>
+        <span class="sem-val mono">color/red/100<br><b>#f1d1d1</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-error-default)"></span></span>
+        <span class="sem-name">color/status/error/default</span>
+        <span class="sem-val mono">color/red/500<br><b>#ba181b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-error-hover)"></span></span>
+        <span class="sem-name">color/status/error/hover</span>
+        <span class="sem-val mono">color/red/600<br><b>#951316</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-error-pressed)"></span></span>
+        <span class="sem-name">color/status/error/pressed</span>
+        <span class="sem-val mono">color/red/700<br><b>#700e10</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-warning-bg)"></span></span>
+        <span class="sem-name">color/status/warning/bg</span>
+        <span class="sem-val mono">color/orange/100<br><b>#f7e4cd</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-warning-default)"></span></span>
+        <span class="sem-name">color/status/warning/default</span>
+        <span class="sem-val mono">color/orange/500<br><b>#d97706</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-warning-hover)"></span></span>
+        <span class="sem-name">color/status/warning/hover</span>
+        <span class="sem-val mono">color/orange/600<br><b>#ae5f05</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-warning-pressed)"></span></span>
+        <span class="sem-name">color/status/warning/pressed</span>
+        <span class="sem-val mono">color/orange/700<br><b>#824704</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-info-bg)"></span></span>
+        <span class="sem-name">color/status/info/bg</span>
+        <span class="sem-val mono">color/blue/100<br><b>#cce4f0</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-info-default)"></span></span>
+        <span class="sem-name">color/status/info/default</span>
+        <span class="sem-val mono">color/blue/500<br><b>#0077b6</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-info-hover)"></span></span>
+        <span class="sem-name">color/status/info/hover</span>
+        <span class="sem-val mono">color/blue/600<br><b>#005f92</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-info-pressed)"></span></span>
+        <span class="sem-name">color/status/info/pressed</span>
+        <span class="sem-val mono">color/blue/700<br><b>#00476d</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-success-bg)"></span></span>
+        <span class="sem-name">color/status/success/bg</span>
+        <span class="sem-val mono">color/green/100<br><b>#d5e1dc</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-success-default)"></span></span>
+        <span class="sem-name">color/status/success/default</span>
+        <span class="sem-val mono">color/green/500<br><b>#2d6a4f</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-success-hover)"></span></span>
+        <span class="sem-name">color/status/success/hover</span>
+        <span class="sem-val mono">color/green/600<br><b>#24553f</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-success-pressed)"></span></span>
+        <span class="sem-name">color/status/success/pressed</span>
+        <span class="sem-val mono">color/green/700<br><b>#1b402f</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-default)"></span></span>
+        <span class="sem-name">color/status/default</span>
+        <span class="sem-val mono">color/deep-space-blue/500<br><b>#212f45</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-hover)"></span></span>
+        <span class="sem-name">color/status/hover</span>
+        <span class="sem-val mono">color/deep-space-blue/600<br><b>#1a2637</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-pressed)"></span></span>
+        <span class="sem-name">color/status/pressed</span>
+        <span class="sem-val mono">color/deep-space-blue/700<br><b>#141c29</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-disabled-on-solid)"></span></span>
+        <span class="sem-name">color/status/disabled/on-solid</span>
+        <span class="sem-val mono">color/neutral/100<br><b>#f1f5f9</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-disabled-on-transparent)"></span></span>
+        <span class="sem-name">color/status/disabled/on-transparent</span>
+        <span class="sem-val mono">color/neutral/200<br><b>#e2e8f0</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-disabled-bg)"></span></span>
+        <span class="sem-name">color/status/disabled/bg</span>
+        <span class="sem-val mono">color/neutral/300<br><b>#cbd5e1</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">background</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-default)"></span></span>
+        <span class="sem-name">color/background/primary/default</span>
+        <span class="sem-val mono">color/neutral/white<br><b>#ffffff</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-hover)"></span></span>
+        <span class="sem-name">color/background/primary/hover</span>
+        <span class="sem-val mono">color/neutral/200<br><b>#e2e8f0</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-pressed)"></span></span>
+        <span class="sem-name">color/background/primary/pressed</span>
+        <span class="sem-val mono">color/neutral/300<br><b>#cbd5e1</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-contrast)"></span></span>
+        <span class="sem-name">color/background/primary/contrast</span>
+        <span class="sem-val mono">color/neutral/100<br><b>#f1f5f9</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-high-contrast)"></span></span>
+        <span class="sem-name">color/background/primary/high-contrast</span>
+        <span class="sem-val mono">color/neutral/300<br><b>#cbd5e1</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-translucent)"></span></span>
+        <span class="sem-name">color/background/primary/translucent</span>
+        <span class="sem-val mono">color/neutral/white @ 30%<br><b>#ffffff4d</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-transparent)"></span></span>
+        <span class="sem-name">color/background/primary/transparent</span>
+        <span class="sem-val mono">color/neutral/white @ 0%<br><b>#ffffff00</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-backdrop-default)"></span></span>
+        <span class="sem-name">color/background/backdrop/default</span>
+        <span class="sem-val mono">#000000bf<br><b>#000000bf</b></span>
+      </div>
+    </div>
+  </div>
+      
+  <div class="panel" data-theme="dark">
+    <h3 class="text-body-md-semi-bold">Dark-mode</h3>
+    
+    <div class="sem-group">
+      <p class="eyebrow">plain</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-white)"></span></span>
+        <span class="sem-name">color/white</span>
+        <span class="sem-val mono">color/neutral/white<br><b>#ffffff</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-100)"></span></span>
+        <span class="sem-name">color/100</span>
+        <span class="sem-val mono">color/neutral/100<br><b>#f1f5f9</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-200)"></span></span>
+        <span class="sem-name">color/200</span>
+        <span class="sem-val mono">color/neutral/200<br><b>#e2e8f0</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-300)"></span></span>
+        <span class="sem-name">color/300</span>
+        <span class="sem-val mono">color/neutral/300<br><b>#cbd5e1</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-400)"></span></span>
+        <span class="sem-name">color/400</span>
+        <span class="sem-val mono">color/neutral/400<br><b>#94a3b8</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-500)"></span></span>
+        <span class="sem-name">color/500</span>
+        <span class="sem-val mono">color/neutral/500<br><b>#64748b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-600)"></span></span>
+        <span class="sem-name">color/600</span>
+        <span class="sem-val mono">color/neutral/600<br><b>#475569</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-700)"></span></span>
+        <span class="sem-name">color/700</span>
+        <span class="sem-val mono">color/neutral/700<br><b>#334155</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-800)"></span></span>
+        <span class="sem-name">color/800</span>
+        <span class="sem-val mono">color/neutral/800<br><b>#1e293b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-900)"></span></span>
+        <span class="sem-name">color/900</span>
+        <span class="sem-val mono">color/neutral/900<br><b>#0f172a</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-black)"></span></span>
+        <span class="sem-name">color/black</span>
+        <span class="sem-val mono">color/neutral/black<br><b>#000000</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">foreground</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-primary-default)"></span></span>
+        <span class="sem-name">color/foreground/primary/default</span>
+        <span class="sem-val mono">color/neutral/100<br><b>#f1f5f9</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-primary-inverse)"></span></span>
+        <span class="sem-name">color/foreground/primary/inverse</span>
+        <span class="sem-val mono">color/neutral/900<br><b>#0f172a</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-primary-muted)"></span></span>
+        <span class="sem-name">color/foreground/primary/muted</span>
+        <span class="sem-val mono">color/neutral/400<br><b>#94a3b8</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-link-default)"></span></span>
+        <span class="sem-name">color/foreground/link/default</span>
+        <span class="sem-val mono">color/deep-space-blue/300<br><b>#7a828f</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-link-hover)"></span></span>
+        <span class="sem-name">color/foreground/link/hover</span>
+        <span class="sem-val mono">color/deep-space-blue/200<br><b>#a6acb5</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-foreground-link-pressed)"></span></span>
+        <span class="sem-name">color/foreground/link/pressed</span>
+        <span class="sem-val mono">color/deep-space-blue/100<br><b>#d3d5da</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">border</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-border-primary-default)"></span></span>
+        <span class="sem-name">color/border/primary/default</span>
+        <span class="sem-val mono">color/neutral/300<br><b>#cbd5e1</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-border-primary-hover)"></span></span>
+        <span class="sem-name">color/border/primary/hover</span>
+        <span class="sem-val mono">color/neutral/200<br><b>#e2e8f0</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-border-primary-xhigh)"></span></span>
+        <span class="sem-name">color/border/primary/xhigh</span>
+        <span class="sem-val mono">color/neutral/100<br><b>#f1f5f9</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-border-primary-contrast)"></span></span>
+        <span class="sem-name">color/border/primary/contrast</span>
+        <span class="sem-val mono">color/neutral/white<br><b>#ffffff</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">brand</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-primary-default)"></span></span>
+        <span class="sem-name">color/brand/primary/default</span>
+        <span class="sem-val mono">color/stormy-teal/300<br><b>#66a2a3</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-primary-hover)"></span></span>
+        <span class="sem-name">color/brand/primary/hover</span>
+        <span class="sem-val mono">color/stormy-teal/200<br><b>#99c1c2</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-primary-pressed)"></span></span>
+        <span class="sem-name">color/brand/primary/pressed</span>
+        <span class="sem-val mono">color/stormy-teal/100<br><b>#cce0e0</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-secondary-default)"></span></span>
+        <span class="sem-name">color/brand/secondary/default</span>
+        <span class="sem-val mono">color/deep-space-blue/300<br><b>#7a828f</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-secondary-hover)"></span></span>
+        <span class="sem-name">color/brand/secondary/hover</span>
+        <span class="sem-val mono">color/deep-space-blue/200<br><b>#a6acb5</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-brand-secondary-pressed)"></span></span>
+        <span class="sem-name">color/brand/secondary/pressed</span>
+        <span class="sem-val mono">color/deep-space-blue/100<br><b>#d3d5da</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">status</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-error-bg)"></span></span>
+        <span class="sem-name">color/status/error/bg</span>
+        <span class="sem-val mono">color/red/900<br><b>#380708</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-error-default)"></span></span>
+        <span class="sem-name">color/status/error/default</span>
+        <span class="sem-val mono">color/red/400<br><b>#c84649</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-error-hover)"></span></span>
+        <span class="sem-name">color/status/error/hover</span>
+        <span class="sem-val mono">color/red/300<br><b>#d67476</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-error-pressed)"></span></span>
+        <span class="sem-name">color/status/error/pressed</span>
+        <span class="sem-val mono">color/red/200<br><b>#e3a3a4</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-warning-bg)"></span></span>
+        <span class="sem-name">color/status/warning/bg</span>
+        <span class="sem-val mono">color/orange/900<br><b>#412402</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-warning-default)"></span></span>
+        <span class="sem-name">color/status/warning/default</span>
+        <span class="sem-val mono">color/orange/500<br><b>#d97706</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-warning-hover)"></span></span>
+        <span class="sem-name">color/status/warning/hover</span>
+        <span class="sem-val mono">color/orange/400<br><b>#e19238</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-warning-pressed)"></span></span>
+        <span class="sem-name">color/status/warning/pressed</span>
+        <span class="sem-val mono">color/orange/300<br><b>#e8ad6a</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-info-bg)"></span></span>
+        <span class="sem-name">color/status/info/bg</span>
+        <span class="sem-val mono">color/blue/900<br><b>#002437</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-info-default)"></span></span>
+        <span class="sem-name">color/status/info/default</span>
+        <span class="sem-val mono">color/blue/400<br><b>#3392c5</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-info-hover)"></span></span>
+        <span class="sem-name">color/status/info/hover</span>
+        <span class="sem-val mono">color/blue/300<br><b>#66add3</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-info-pressed)"></span></span>
+        <span class="sem-name">color/status/info/pressed</span>
+        <span class="sem-val mono">color/blue/200<br><b>#99c9e2</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-success-bg)"></span></span>
+        <span class="sem-name">color/status/success/bg</span>
+        <span class="sem-val mono">color/green/900<br><b>#0e2018</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-success-default)"></span></span>
+        <span class="sem-name">color/status/success/default</span>
+        <span class="sem-val mono">color/green/400<br><b>#578872</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-success-hover)"></span></span>
+        <span class="sem-name">color/status/success/hover</span>
+        <span class="sem-val mono">color/green/300<br><b>#81a695</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-success-pressed)"></span></span>
+        <span class="sem-name">color/status/success/pressed</span>
+        <span class="sem-val mono">color/green/200<br><b>#abc3b9</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-default)"></span></span>
+        <span class="sem-name">color/status/default</span>
+        <span class="sem-val mono">color/deep-space-blue/500<br><b>#212f45</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-hover)"></span></span>
+        <span class="sem-name">color/status/hover</span>
+        <span class="sem-val mono">color/deep-space-blue/600<br><b>#1a2637</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-pressed)"></span></span>
+        <span class="sem-name">color/status/pressed</span>
+        <span class="sem-val mono">color/deep-space-blue/700<br><b>#141c29</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-disabled-on-solid)"></span></span>
+        <span class="sem-name">color/status/disabled/on-solid</span>
+        <span class="sem-val mono">color/neutral/900<br><b>#0f172a</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-disabled-on-transparent)"></span></span>
+        <span class="sem-name">color/status/disabled/on-transparent</span>
+        <span class="sem-val mono">color/neutral/800<br><b>#1e293b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-status-disabled-bg)"></span></span>
+        <span class="sem-name">color/status/disabled/bg</span>
+        <span class="sem-val mono">color/neutral/700<br><b>#334155</b></span>
+      </div>
+    </div>
+    <div class="sem-group">
+      <p class="eyebrow">background</p>
+      
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-default)"></span></span>
+        <span class="sem-name">color/background/primary/default</span>
+        <span class="sem-val mono">color/neutral/black<br><b>#000000</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-hover)"></span></span>
+        <span class="sem-name">color/background/primary/hover</span>
+        <span class="sem-val mono">color/neutral/800<br><b>#1e293b</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-pressed)"></span></span>
+        <span class="sem-name">color/background/primary/pressed</span>
+        <span class="sem-val mono">color/neutral/700<br><b>#334155</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-contrast)"></span></span>
+        <span class="sem-name">color/background/primary/contrast</span>
+        <span class="sem-val mono">color/neutral/900<br><b>#0f172a</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-high-contrast)"></span></span>
+        <span class="sem-name">color/background/primary/high-contrast</span>
+        <span class="sem-val mono">color/neutral/700<br><b>#334155</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-translucent)"></span></span>
+        <span class="sem-name">color/background/primary/translucent</span>
+        <span class="sem-val mono">color/neutral/black @ 30%<br><b>#0000004d</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-primary-transparent)"></span></span>
+        <span class="sem-name">color/background/primary/transparent</span>
+        <span class="sem-val mono">color/neutral/black @ 0%<br><b>#00000000</b></span>
+      </div>
+      <div class="sem-row">
+        <span class="chip check"><span style="background:var(--color-background-backdrop-default)"></span></span>
+        <span class="sem-name">color/background/backdrop/default</span>
+        <span class="sem-val mono">#000000bf<br><b>#000000bf</b></span>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <section id="type">
+    <h2 class="text-h3">Typography</h2>
+    <p class="lede">One CSS class per Figma text style, e.g. <span class="mono">.text-h1</span>.</p>
+    
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-h1</b>
+        <p class="meta mono">32/40px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-h1">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-h2</b>
+        <p class="meta mono">28/36px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-h2">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-h3</b>
+        <p class="meta mono">24/32px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-h3">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-xxs</b>
+        <p class="meta mono">10/18px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-xxs">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-xl-bold</b>
+        <p class="meta mono">20/28px · 700 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-xl-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-xl-semi-bold</b>
+        <p class="meta mono">20/28px · 600 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-xl-semi-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-xl-regular</b>
+        <p class="meta mono">20/28px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-xl-regular">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-lg-bold</b>
+        <p class="meta mono">18/26px · 700 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-lg-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-lg-semi-bold</b>
+        <p class="meta mono">18/26px · 600 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-lg-semi-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-lg-regular</b>
+        <p class="meta mono">18/26px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-lg-regular">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-md-bold</b>
+        <p class="meta mono">16/24px · 700 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-md-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-md-semi-bold</b>
+        <p class="meta mono">16/24px · 600 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-md-semi-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-md-regular</b>
+        <p class="meta mono">16/24px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-md-regular">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-sm-bold</b>
+        <p class="meta mono">14/22px · 700 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-sm-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-sm-semi-bold</b>
+        <p class="meta mono">14/22px · 600 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-sm-semi-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-sm-regular</b>
+        <p class="meta mono">14/22px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-sm-regular">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-xs-bold</b>
+        <p class="meta mono">12/20px · 700 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-xs-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-xs-semi-bold</b>
+        <p class="meta mono">12/20px · 600 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-xs-semi-bold">Run together, finish stronger</p>
+    </div>
+    <div class="type-row">
+      <div>
+        <b class="mono">.text-body-xs-regular</b>
+        <p class="meta mono">12/20px · 400 · Instrument Sans</p>
+      </div>
+      <p class="sample text-body-xs-regular">Run together, finish stronger</p>
+    </div>
+  </section>
+
+  <section id="spacing">
+    <h2 class="text-h3">Spacing</h2>
+    <p class="lede">The bar width uses the token directly.</p>
+    
+    <div class="size-row"><span class="mono">--sizes-spacing-none</span><span class="mono">0px</span><span class="bar-fill" style="width:var(--sizes-spacing-none)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-2</span><span class="mono">2px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-2)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-4</span><span class="mono">4px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-4)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-6</span><span class="mono">6px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-6)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-8</span><span class="mono">8px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-8)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-10</span><span class="mono">10px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-10)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-12</span><span class="mono">12px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-12)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-14</span><span class="mono">14px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-14)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-16</span><span class="mono">16px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-16)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-18</span><span class="mono">18px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-18)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-20</span><span class="mono">20px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-20)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-22</span><span class="mono">22px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-22)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-24</span><span class="mono">24px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-24)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-28</span><span class="mono">28px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-28)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-32</span><span class="mono">32px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-32)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-36</span><span class="mono">36px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-36)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-40</span><span class="mono">40px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-40)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-48</span><span class="mono">48px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-48)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-56</span><span class="mono">56px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-56)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-64</span><span class="mono">64px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-64)"></span></div>
+    <div class="size-row"><span class="mono">--sizes-spacing-sp-80</span><span class="mono">80px</span><span class="bar-fill" style="width:var(--sizes-spacing-sp-80)"></span></div>
+  </section>
+
+  <section id="radius">
+    <h2 class="text-h3">Radius</h2>
+    <div class="tiles">
+      
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-none)"></div>
+        <span class="mono">none</span><br><span class="mono meta">0px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-4)"></div>
+        <span class="mono">rd-4</span><br><span class="mono meta">4px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-8)"></div>
+        <span class="mono">rd-8</span><br><span class="mono meta">8px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-12)"></div>
+        <span class="mono">rd-12</span><br><span class="mono meta">12px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-16)"></div>
+        <span class="mono">rd-16</span><br><span class="mono meta">16px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-20)"></div>
+        <span class="mono">rd-20</span><br><span class="mono meta">20px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-24)"></div>
+        <span class="mono">rd-24</span><br><span class="mono meta">24px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-28)"></div>
+        <span class="mono">rd-28</span><br><span class="mono meta">28px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-32)"></div>
+        <span class="mono">rd-32</span><br><span class="mono meta">32px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-36)"></div>
+        <span class="mono">rd-36</span><br><span class="mono meta">36px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-40)"></div>
+        <span class="mono">rd-40</span><br><span class="mono meta">40px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-48)"></div>
+        <span class="mono">rd-48</span><br><span class="mono meta">48px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-56)"></div>
+        <span class="mono">rd-56</span><br><span class="mono meta">56px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-64)"></div>
+        <span class="mono">rd-64</span><br><span class="mono meta">64px</span></div>
+      <div class="tile"><div class="shape" style="border-radius:var(--sizes-radius-rd-80)"></div>
+        <span class="mono">rd-80</span><br><span class="mono meta">80px</span></div>
+    </div>
+  </section>
+
+  <section id="border">
+    <h2 class="text-h3">Border width</h2>
+    <div class="tiles">
+      
+      <div class="tile"><div class="bshape" style="border-width:var(--sizes-border-none)"></div>
+        <span class="mono">none</span><br><span class="mono meta">0px</span></div>
+      <div class="tile"><div class="bshape" style="border-width:var(--sizes-border-br-1)"></div>
+        <span class="mono">br-1</span><br><span class="mono meta">1px</span></div>
+      <div class="tile"><div class="bshape" style="border-width:var(--sizes-border-br-2)"></div>
+        <span class="mono">br-2</span><br><span class="mono meta">2px</span></div>
+    </div>
+  </section>
+
+  <section id="effects">
+    <h2 class="text-h3">Effects</h2>
+    <p class="lede">Background blurs, one class per style (e.g. <span class="mono">.effect-blur-glass-progressive-xxl</span>).
+      Progressive blurs are approximated with a gradient mask (CSS has no native progressive blur), and the same radius
+      may look slightly softer or sharper than in Figma, so compare visually.</p>
+    <div class="glass-stage">
+      <div class="glass-grid">
+        
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-progressive-xxl" aria-hidden="true"></span>
+          <b>Blur/Glass/Progressive/xxl</b><span class="mono">32px · progressive</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-progressive-xl" aria-hidden="true"></span>
+          <b>Blur/Glass/Progressive/xl</b><span class="mono">24px · progressive</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-progressive-md" aria-hidden="true"></span>
+          <b>Blur/Glass/Progressive/md</b><span class="mono">8px · progressive</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-progressive-sm" aria-hidden="true"></span>
+          <b>Blur/Glass/Progressive/sm</b><span class="mono">4px · progressive</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-progressive-lg" aria-hidden="true"></span>
+          <b>Blur/Glass/Progressive/lg</b><span class="mono">16px · progressive</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-uniform-xxl" aria-hidden="true"></span>
+          <b>Blur/Glass/Uniform/xxl</b><span class="mono">32px</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-uniform-xl" aria-hidden="true"></span>
+          <b>Blur/Glass/Uniform/xl</b><span class="mono">24px</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-uniform-lg" aria-hidden="true"></span>
+          <b>Blur/Glass/Uniform/lg</b><span class="mono">16px</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-uniform-md" aria-hidden="true"></span>
+          <b>Blur/Glass/Uniform/md</b><span class="mono">8px</span></div>
+        <div class="glass">
+          <span class="glass-bg effect-blur-glass-uniform-sm" aria-hidden="true"></span>
+          <b>Blur/Glass/Uniform/sm</b><span class="mono">4px</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Generated by scripts/build-tokens.mjs. Do not edit by hand.</footer>
+</main>
+<script>
+  (function () {
+    var root = document.documentElement, btns = document.querySelectorAll('[data-set]');
+    function apply(mode) {
+      if (mode === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', mode);
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.set === mode)); });
+      try { localStorage.setItem('runion-theme', mode); } catch (e) {}
+    }
+    var saved = 'auto';
+    try { saved = localStorage.getItem('runion-theme') || 'auto'; } catch (e) {}
+    apply(saved);
+    btns.forEach(function (b) { b.addEventListener('click', function () { apply(b.dataset.set); }); });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+/*
+ * MobileStepper — mirrors Figma <MobileStepper> (Runion).
+ * Dots: [back 40] [dots 28 each, Circle 16] [next 40], brand/secondary; back/next disabled at the ends.
+ * Text: "1/4" in body-sm/regular.
+ */
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sizes-spacing-sp-8);
+  width: 100%;
+}
+/* [data-color] raises specificity above IconButton's own ghost colour rules, whatever the CSS load order. */
+.root .nav[data-color] {
+  color: var(--color-brand-secondary-default);
+}
+.root .nav[data-color]:disabled {
+  color: var(--color-status-disabled-on-transparent);
+}
+.dots {
+  display: inline-flex;
+  align-items: center;
+}
+.dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--color-brand-secondary-default);
+}
+.dot svg {
+  width: 16px;
+  height: 16px;
+}
+.text {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  color: var(--color-foreground-primary-default);
+}

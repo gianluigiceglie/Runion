@@ -1,0 +1,104 @@
+/*
+ * Checkbox — mirrors Figma <Checkbox>, <FormControlLabel> | Checkbox, <FormGroup> | <Checkbox> (Runion).
+ * Box 28×28, pad 2, rd-8; Phosphor Square / CheckSquare / MinusSquare 24 in foreground/primary/default.
+ * Hover: background hover · Press: background pressed · Focus: 1px inside brand/secondary
+ * Focus + hover: background hover + brand/secondary hover.
+ */
+.box {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: var(--sizes-spacing-sp-2);
+  border-radius: var(--sizes-radius-rd-8);
+  color: var(--color-foreground-primary-default);
+  transition: background-color 120ms ease;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.box svg {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+.box:hover {
+  background: var(--color-background-primary-hover);
+}
+.box:active {
+  background: var(--color-background-primary-pressed);
+}
+.box:has(.input:focus-visible) {
+  box-shadow: inset 0 0 0 var(--sizes-border-br-1) var(--color-brand-secondary-default);
+}
+.box:has(.input:focus-visible):hover {
+  background: var(--color-background-primary-hover);
+  box-shadow: inset 0 0 0 var(--sizes-border-br-1) var(--color-brand-secondary-hover);
+}
+/* Disabled: Figma keeps the enabled icon colour; the prototype uses the disabled colour so it reads as unavailable. */
+.box[data-disabled='true'] {
+  color: var(--color-status-disabled-on-transparent);
+  background: transparent;
+  cursor: not-allowed;
+}
+
+/* ---------- FormControlLabel ---------- */
+.control {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  gap: var(--sizes-spacing-sp-4);
+  padding-right: var(--sizes-spacing-sp-4);
+  border-radius: var(--sizes-radius-rd-8);
+  cursor: pointer;
+}
+.start {
+  flex-direction: row-reverse;
+  padding-right: 0;
+  padding-left: var(--sizes-spacing-sp-4);
+}
+.control[data-disabled='true'] {
+  cursor: not-allowed;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--sizes-spacing-sp-2);
+}
+
+/* ---------- FormGroup ---------- */
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-4);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.groupHead {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-2);
+}
+.row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--sizes-spacing-sp-8);
+}

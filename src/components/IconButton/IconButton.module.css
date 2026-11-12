@@ -1,0 +1,124 @@
+/*
+ * IconButton — mirrors Figma <IconButton> (Runion).
+ * Sizes: Large 56 (pad 16, icon 24) · Medium 48 (pad 12, icon 24) · Small 40 (pad 10, icon 20) · x-Small 24 (pad 4, icon 16)
+ * Shape: circle (rd-80). Colours from data-color (--c / --c-hover / --c-pressed).
+ */
+.root {
+  --icon: 24px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border: 0;
+  border-radius: var(--sizes-radius-rd-80);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
+}
+.root:focus-visible {
+  outline: var(--sizes-border-br-2) solid var(--c);
+  outline-offset: var(--sizes-spacing-sp-2);
+}
+.root svg {
+  width: var(--icon);
+  height: var(--icon);
+  flex: none;
+}
+
+/* ---- sizes ---- */
+.large {
+  padding: var(--sizes-spacing-sp-16);
+}
+.medium {
+  padding: var(--sizes-spacing-sp-12);
+}
+.small {
+  --icon: 20px;
+  padding: var(--sizes-spacing-sp-10);
+}
+.xsmall {
+  --icon: 16px;
+  padding: var(--sizes-spacing-sp-4);
+}
+
+/* ---- solid ---- */
+.solid {
+  background: var(--c);
+  color: var(--color-foreground-primary-inverse);
+}
+.solid:hover {
+  background: var(--c-hover);
+}
+.solid:active {
+  background: var(--c-pressed);
+}
+.solid:focus-visible:hover {
+  outline-color: var(--c-hover);
+}
+
+/* ---- outlined ---- */
+.outlined {
+  background: var(--color-background-primary-default);
+  color: var(--c);
+  box-shadow: inset 0 0 0 var(--sizes-border-br-2) var(--c);
+}
+.outlined:hover {
+  background: var(--color-background-primary-hover);
+}
+.outlined:active {
+  background: var(--color-background-primary-pressed);
+  color: var(--c-pressed);
+}
+.outlined:focus-visible:hover {
+  background: var(--color-background-primary-pressed);
+}
+
+/* ---- ghost ---- */
+.ghost {
+  background: transparent;
+  color: var(--c);
+}
+/* Figma: Ghost + Secondary uses the default foreground colour, not brand/secondary. */
+.ghost[data-color='secondary'] {
+  color: var(--color-foreground-primary-default);
+}
+.ghost:hover {
+  background: var(--color-background-primary-hover);
+}
+.ghost:active {
+  background: var(--color-background-primary-pressed);
+}
+
+/* ---- disabled ---- */
+.root:disabled {
+  cursor: not-allowed;
+}
+.solid:disabled {
+  background: var(--color-status-disabled-bg);
+  color: var(--color-status-disabled-on-solid);
+}
+.outlined:disabled {
+  background: transparent;
+  color: var(--color-status-disabled-on-transparent);
+  box-shadow: inset 0 0 0 var(--sizes-border-br-2) var(--color-status-disabled-on-transparent);
+}
+.ghost:disabled {
+  background: transparent;
+  color: var(--color-status-disabled-on-transparent);
+}
+
+/* ---- loading ---- */
+.loading {
+  cursor: progress;
+}
+.loading.solid {
+  background: var(--c);
+}
+.loading.outlined,
+.loading.ghost {
+  background: var(--color-background-primary-default);
+}
+.spin {
+  animation: runion-spin 1s linear infinite;
+}

@@ -1,0 +1,118 @@
+/*
+ * Tabs — mirrors Figma <Tabs> / <TabItem> (Runion): a pill-shaped segmented control.
+ * TabItem: height 40, pad 8/28, gap 8, rd-40, 16/24 semi-bold.
+ * Active: brand/secondary pill + inverse text. Hover/press: background hover/pressed.
+ * Focus: 1px inside border/primary/hover; focus + hover: hover background + border/primary/xhigh.
+ */
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+.list {
+  display: inline-flex;
+  align-items: stretch;
+  background: var(--color-background-primary-default);
+  border-radius: var(--sizes-radius-rd-40);
+  max-width: 100%;
+  /* Standard tabs that don't fit scroll instead of being cut off (no scroll buttons). */
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.fullWidth .list {
+  display: flex;
+  width: 100%;
+  overflow-x: visible;
+}
+.fullWidth .tab {
+  flex: 1 1 0;
+  min-width: 0;
+  /* Phone adaptation: Figma's 28px side padding doesn't fit 4 equal tabs at 375px width.
+     Figma has no "Small Screen" variant for Full Width, so 8px is used here. */
+  padding-inline: var(--sizes-spacing-sp-8);
+}
+
+.scrollable .list {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  flex: 1 1 auto;
+}
+.scrollable .list::-webkit-scrollbar {
+  display: none;
+}
+.scrollButton {
+  flex: none;
+}
+
+.tab {
+  --icon: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sizes-spacing-sp-8);
+  flex: none;
+  min-height: 40px;
+  padding: var(--sizes-spacing-sp-8) var(--sizes-spacing-sp-28);
+  border: 0;
+  border-radius: var(--sizes-radius-rd-40);
+  background: transparent;
+  color: var(--color-foreground-primary-default);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+  font-weight: var(--font-weight-semi-bold);
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+.tab svg {
+  width: var(--icon);
+  height: var(--icon);
+  flex: none;
+}
+
+.iconUp {
+  flex-direction: column;
+}
+.iconRight {
+  flex-direction: row-reverse;
+}
+
+.tab:hover {
+  background: var(--color-background-primary-hover);
+}
+.tab:active {
+  background: var(--color-background-primary-pressed);
+}
+.tab:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 var(--sizes-border-br-1) var(--color-border-primary-hover);
+}
+.tab:focus-visible:hover {
+  background: var(--color-background-primary-hover);
+  box-shadow: inset 0 0 0 var(--sizes-border-br-1) var(--color-border-primary-xhigh);
+}
+
+.tab[aria-selected='true'] {
+  background: var(--color-brand-secondary-default);
+  color: var(--color-foreground-primary-inverse);
+}
+
+.tab:disabled {
+  background: transparent;
+  color: var(--color-status-disabled-on-transparent);
+  cursor: not-allowed;
+}
+
+.panel:focus-visible {
+  outline: var(--sizes-border-br-2) solid var(--color-brand-primary-default);
+  outline-offset: var(--sizes-spacing-sp-2);
+  border-radius: var(--sizes-radius-rd-4);
+}

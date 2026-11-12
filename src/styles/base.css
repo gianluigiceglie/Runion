@@ -1,0 +1,97 @@
+/*
+ * Global base styles for the Runion prototype.
+ * Only tokens from tokens/tokens.css are used; no raw colours or sizes.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background-primary-default);
+  color: var(--color-foreground-primary-default);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+  font-weight: var(--font-weight-regular);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Hide visually but keep available to screen readers. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+ * Colour roles. Components set data-color="…" and read --c, --c-hover, --c-pressed.
+ * Names follow the Figma "Color" property: Button uses "Danger", IconButton uses "Error"; both map to status/error.
+ */
+[data-color='primary'] {
+  --c: var(--color-brand-primary-default);
+  --c-hover: var(--color-brand-primary-hover);
+  --c-pressed: var(--color-brand-primary-pressed);
+}
+[data-color='secondary'] {
+  --c: var(--color-brand-secondary-default);
+  --c-hover: var(--color-brand-secondary-hover);
+  --c-pressed: var(--color-brand-secondary-pressed);
+}
+[data-color='danger'],
+[data-color='error'] {
+  --c: var(--color-status-error-default);
+  --c-hover: var(--color-status-error-hover);
+  --c-pressed: var(--color-status-error-pressed);
+}
+[data-color='warning'] {
+  --c: var(--color-status-warning-default);
+  --c-hover: var(--color-status-warning-hover);
+  --c-pressed: var(--color-status-warning-pressed);
+}
+[data-color='info'] {
+  --c: var(--color-status-info-default);
+  --c-hover: var(--color-status-info-hover);
+  --c-pressed: var(--color-status-info-pressed);
+}
+[data-color='success'] {
+  --c: var(--color-status-success-default);
+  --c-hover: var(--color-status-success-hover);
+  --c-pressed: var(--color-status-success-pressed);
+}
+
+@keyframes runion-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

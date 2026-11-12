@@ -1,0 +1,119 @@
+/*
+ * Slider — mirrors Figma <Slider> (Medium) in Runion.
+ * Rail 4px brand/secondary (full radius) · Track 6px brand/primary · Thumb 24 circle, 2px brand/primary ring,
+ * background/primary/contrast centre · Marks 4×4 background/primary/default · Value labels body-sm/regular.
+ * A native <input type="range"> sits on top for dragging, keyboard and screen readers; only its thumb is visible.
+ */
+.root {
+  --thumb: 24px;
+  --rail: 4px;
+  --track: 6px;
+  --rail-color: var(--color-brand-secondary-default);
+  --track-color: var(--color-brand-primary-default);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-8);
+  width: 100%;
+}
+.root[data-disabled='true'] {
+  --rail-color: var(--color-status-disabled-bg);
+  --track-color: var(--color-status-disabled-on-transparent);
+}
+
+.control {
+  position: relative;
+  height: var(--thumb);
+}
+
+.rail,
+.track {
+  position: absolute;
+  left: 0;
+  border-radius: 100px;
+  pointer-events: none;
+}
+.rail {
+  top: calc((var(--thumb) - var(--rail)) / 2);
+  width: 100%;
+  height: var(--rail);
+  background: var(--rail-color);
+}
+.track {
+  top: calc((var(--thumb) - var(--track)) / 2);
+  /* thumb centre travels from thumb/2 to 100% - thumb/2 */
+  width: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--pct));
+  height: var(--track);
+  background: var(--track-color);
+}
+.mark {
+  position: absolute;
+  top: calc((var(--thumb) - 4px) / 2);
+  left: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--at) - 2px);
+  width: 4px;
+  height: 4px;
+  background: var(--color-background-primary-default);
+  pointer-events: none;
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: var(--thumb);
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.input:disabled {
+  cursor: not-allowed;
+}
+.input::-webkit-slider-runnable-track {
+  height: var(--thumb);
+  background: transparent;
+}
+.input::-moz-range-track {
+  height: var(--thumb);
+  background: transparent;
+}
+.input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  border: var(--sizes-border-br-2) solid var(--track-color);
+  background: var(--color-background-primary-contrast);
+  box-sizing: border-box;
+}
+.input::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  border: var(--sizes-border-br-2) solid var(--track-color);
+  background: var(--color-background-primary-contrast);
+  box-sizing: border-box;
+}
+.input:focus-visible {
+  outline: none;
+}
+.input:focus-visible::-webkit-slider-thumb {
+  outline: var(--sizes-border-br-2) solid var(--color-brand-primary-default);
+  outline-offset: var(--sizes-spacing-sp-2);
+}
+.input:focus-visible::-moz-range-thumb {
+  outline: var(--sizes-border-br-2) solid var(--color-brand-primary-default);
+  outline-offset: var(--sizes-spacing-sp-2);
+}
+
+.values {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  color: var(--color-foreground-primary-default);
+}
+.root[data-disabled='true'] .values {
+  color: var(--color-status-disabled-on-transparent);
+}
