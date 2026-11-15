@@ -29,7 +29,7 @@ export function MobileStepper({ steps, activeStep, variant = 'dots', onBack, onN
 
   if (variant === 'text') {
     return (
-      <div className={cx(styles.root, className)} role="status" aria-label={status}>
+      <div className={cx(styles.root, styles.textOnly, className)} role="status" aria-label={status}>
         <span className={styles.text} aria-hidden="true">
           {active + 1}/{total}
         </span>

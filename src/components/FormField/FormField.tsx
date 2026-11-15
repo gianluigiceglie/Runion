@@ -13,7 +13,7 @@ import {
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
 } from 'react';
-import { CaretDown, Eye, EyeSlash, X } from '@phosphor-icons/react';
+import { CaretDown, Eye, EyeSlash, XCircle } from '@phosphor-icons/react';
 import { IconButton } from '../IconButton/IconButton';
 import { cx } from '../../utils/cx';
 import styles from './FormField.module.css';
@@ -214,7 +214,7 @@ const InputBase = forwardRef<HTMLInputElement, TextFieldProps & { kind: 'text' |
       />
       {(showClear || kind === 'password') && (
         <span className={styles.actions}>
-          {showClear && <IconButton className={styles.action} icon={<X />} aria-label="Clear" variant="ghost" color="secondary" size="small" onClick={clear} />}
+          {showClear && <IconButton className={styles.action} icon={<XCircle />} aria-label="Clear" variant="ghost" color="secondary" size="small" onClick={clear} />}
           {kind === 'password' && (
             <IconButton
               className={styles.action}

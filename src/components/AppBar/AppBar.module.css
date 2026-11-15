@@ -1,0 +1,20 @@
+/* Figma <AppBar> Variant=Child: 56 high, gap 16, back button left. */
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--sizes-spacing-sp-16);
+  min-height: 56px;
+  margin-left: calc(-1 * var(--sizes-spacing-sp-12));
+}
+.title {
+  flex: 1 1 auto;
+  margin: 0;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+  font-weight: var(--font-weight-semi-bold);
+}
+.actions {
+  margin-left: auto;
+  display: flex;
+  gap: var(--sizes-spacing-sp-8);
+}

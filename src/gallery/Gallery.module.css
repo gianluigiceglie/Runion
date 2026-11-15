@@ -102,3 +102,10 @@
   gap: var(--sizes-spacing-sp-12);
   height: 32px;
 }
+.avatarRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sizes-spacing-sp-16);
+  margin-bottom: var(--sizes-spacing-sp-16);
+}

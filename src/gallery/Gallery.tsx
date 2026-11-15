@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PersonSimpleRun, Star, House, MapPin, ChatCircle, User } from '@phosphor-icons/react';
 import {
+  Avatar,
   Button,
   Checkbox,
   Divider,
@@ -16,12 +17,15 @@ import {
   Tabs,
   TextArea,
   TextField,
+  type AvatarSize,
+  type AvatarVariant,
   type ButtonColor,
   type ButtonSize,
   type ButtonVariant,
   type IconButtonColor,
   type IconButtonSize,
 } from '../components';
+import samplePhoto from '../assets/photos/slide1-front.jpg'; // sample photo for Avatar Content=Image
 import styles from './Gallery.module.css';
 
 const VARIANTS: ButtonVariant[] = ['solid', 'outlined', 'ghost'];
@@ -66,7 +70,9 @@ function ThemeSwitch() {
   );
 }
 
-const SECTIONS = ['Button', 'IconButton', 'Tabs', 'FormField', 'Divider', 'Slider', 'Checkbox', 'MobileStepper'];
+const SECTIONS = ['Button', 'IconButton', 'Tabs', 'FormField', 'Divider', 'Slider', 'Checkbox', 'MobileStepper', 'Avatar'];
+const AVATAR_SIZES: AvatarSize[] = [120, 80, 60, 40, 32, 24];
+const AVATAR_VARIANTS: AvatarVariant[] = ['circular', 'rounded', 'square'];
 
 export function Gallery() {
   const [tab, setTab] = useState('explore');
@@ -265,10 +271,11 @@ export function Gallery() {
         {/* ------------------------------------------------------------ Slider */}
         <section id="slider" className={styles.section}>
           <h2>Slider</h2>
+          <p className={styles.eyebrow}>As in Figma: 2–10 km, step 2, marks</p>
+          <Slider aria-label="Running area radius" min={2} max={10} step={2} defaultValue={2} marks formatValue={(v) => `${v}km`} />
+          <p className={styles.eyebrow}>Continuous</p>
           <Slider aria-label="Distance" min={0} max={100} value={distance} onChange={setDistance} formatValue={(v) => `${v} km`} />
-          <p className={styles.note}>Value: {distance} km</p>
-          <p className={styles.eyebrow}>With marks</p>
-          <Slider aria-label="Level" min={0} max={5} step={1} defaultValue={2} marks />
+          <p className={styles.note}>The left label is the current value and updates while dragging; the right one is the maximum.</p>
           <p className={styles.eyebrow}>Disabled</p>
           <Slider aria-label="Disabled slider" defaultValue={40} disabled />
         </section>
@@ -320,6 +327,30 @@ export function Gallery() {
           <MobileStepper steps={4} activeStep={step} onBack={() => setStep((s) => s - 1)} onNext={() => setStep((s) => s + 1)} />
           <p className={styles.eyebrow}>Text</p>
           <MobileStepper variant="text" steps={4} activeStep={step} />
+        </section>
+
+        {/* ------------------------------------------------------------ Avatar */}
+        <section id="avatar" className={styles.section}>
+          <h2>Avatar</h2>
+          {AVATAR_VARIANTS.map((variant) => (
+            <div key={variant}>
+              <p className={styles.eyebrow}>{cap(variant)}: image · initials · icon</p>
+              {[false, true].map((badge) => (
+                <div key={String(badge)} className={styles.avatarRow}>
+                  {AVATAR_SIZES.map((size) => (
+                    <Avatar key={`p${size}`} size={size} variant={variant} badge={badge} src={samplePhoto} alt="" />
+                  ))}
+                  {AVATAR_SIZES.map((size) => (
+                    <Avatar key={`t${size}`} size={size} variant={variant} badge={badge} initials="RN" />
+                  ))}
+                  {AVATAR_SIZES.map((size) => (
+                    <Avatar key={`i${size}`} size={size} variant={variant} badge={badge} />
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+          <p className={styles.note}>Second row of each shape: Badge on. A photo that fails to load falls back to initials, then the icon.</p>
         </section>
       </main>
     </div>

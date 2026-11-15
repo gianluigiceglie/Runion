@@ -1,0 +1,17 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sizes-spacing-sp-8);
+  padding: var(--sizes-spacing-sp-4);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--sizes-radius-rd-8);
+  background: var(--color-foreground-primary-muted);
+  transition: width 200ms ease, background-color 200ms ease;
+}
+.active {
+  width: 24px;
+  background: var(--color-brand-secondary-default);
+}

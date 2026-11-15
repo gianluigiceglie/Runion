@@ -1,0 +1,52 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sizes-spacing-sp-4);
+}
+/* Holds the 80px <Avatar> and positions the camera button over it. */
+.circle {
+  position: relative;
+  display: flex;
+  width: 80px;
+  height: 80px;
+}
+/*
+ * Camera button: IconButton Small, Solid, Secondary look (Figma "Avatar + Action").
+ * Figma places it at x 60, y 40 on the 80px avatar: bottom-aligned, sticking out 20px (half its width) past the right edge.
+ */
+.camera {
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--sizes-radius-rd-80);
+  background: var(--color-brand-secondary-default);
+  color: var(--color-foreground-primary-inverse);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+.camera:hover {
+  background: var(--color-brand-secondary-hover);
+}
+.camera:active {
+  background: var(--color-brand-secondary-pressed);
+}
+.camera svg {
+  width: 20px;
+  height: 20px;
+}
+.circle:has(input:focus-visible) .camera {
+  outline: var(--sizes-border-br-2) solid var(--color-brand-secondary-default);
+  outline-offset: var(--sizes-spacing-sp-2);
+}
+.error {
+  margin: var(--sizes-spacing-sp-16) 0 0;
+  font-size: var(--font-size-body-xs);
+  line-height: var(--line-height-body-xs);
+  color: var(--color-status-error-default);
+}

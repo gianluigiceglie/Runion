@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 24px;
+}
+.line {
+  flex: 1 1 0;
+}
+.text {
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+  color: var(--color-foreground-primary-default);
+}

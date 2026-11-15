@@ -1,0 +1,75 @@
+/* Figma "<Avatar>". The root only sizes and positions; .face draws the avatar; .badge may overflow the corner. */
+.root {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+}
+
+/* 1px inside border = border/primary/contrast: transparent in light mode, white in dark mode. */
+.face {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: var(--sizes-border-br-1) solid var(--color-border-primary-contrast);
+  background: var(--color-background-primary-contrast);
+  color: var(--color-foreground-primary-default);
+  white-space: nowrap;
+  user-select: none;
+}
+/* Content=Image has only the photo fill, no background colour. */
+.root[data-content='image'] .face {
+  background: none;
+}
+
+/* Figma: Circular = rd-80; Rounded (4) and Square (0) are raw values, not tokens. */
+.root[data-variant='circular'] .face {
+  border-radius: var(--sizes-radius-rd-80);
+}
+.root[data-variant='rounded'] .face {
+  border-radius: 4px;
+}
+.root[data-variant='square'] .face {
+  border-radius: 0;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*
+ * Figma "Badge": a ring in background/primary/default around a status/success/default dot (sizes are raw Figma values,
+ * set per avatar size in Avatar.tsx). Position follows the pattern of most Figma sizes:
+ * Circular → ring's outer corner on the avatar's corner; Rounded/Square → ring centred on the corner.
+ */
+.badge {
+  box-sizing: border-box;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: var(--badge-ring);
+  height: var(--badge-ring);
+  padding: var(--badge-thickness);
+  border-radius: var(--sizes-radius-rd-80);
+  background: var(--color-background-primary-default);
+}
+.root[data-variant='rounded'] .badge,
+.root[data-variant='square'] .badge {
+  right: calc(var(--badge-ring) / -2);
+  bottom: calc(var(--badge-ring) / -2);
+}
+.dot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--sizes-radius-rd-80);
+  background: var(--color-status-success-default);
+}

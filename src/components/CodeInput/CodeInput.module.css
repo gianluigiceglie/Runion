@@ -1,0 +1,40 @@
+/* Figma VerificationForm: 6 × TextField Medium (40×40), gap 16. Same border states as TextField. */
+.root {
+  display: flex;
+  justify-content: center;
+  gap: var(--sizes-spacing-sp-16);
+}
+.box {
+  --border: var(--color-border-primary-default);
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--sizes-radius-rd-4);
+  background: transparent;
+  box-shadow: inset 0 0 0 var(--sizes-border-br-1) var(--border);
+  text-align: center;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+  font-weight: var(--font-weight-semi-bold);
+  color: var(--color-foreground-primary-default);
+  caret-color: var(--color-brand-primary-default);
+  outline: none;
+  transition: box-shadow 120ms ease;
+}
+.box:hover {
+  --border: var(--color-border-primary-hover);
+}
+.box:focus {
+  box-shadow: inset 0 0 0 var(--sizes-border-br-2) var(--color-brand-primary-default);
+}
+.box[data-status='error'] {
+  --border: var(--color-status-error-default);
+}
+.box[data-status='error']:focus {
+  box-shadow: inset 0 0 0 var(--sizes-border-br-2) var(--color-status-error-pressed);
+}
+.box:disabled {
+  --border: var(--color-status-disabled-on-transparent);
+  color: var(--color-status-disabled-on-transparent);
+}

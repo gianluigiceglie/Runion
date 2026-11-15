@@ -1,23 +1,29 @@
 /*
- * Slider — mirrors Figma <Slider> (Medium) in Runion.
- * Rail 4px brand/secondary (full radius) · Track 6px brand/primary · Thumb 24 circle, 2px brand/primary ring,
- * background/primary/contrast centre · Marks 4×4 background/primary/default · Value labels body-sm/regular.
+ * Slider — mirrors Figma <Slider> (built from _SliderTrack, _SliderRail, _SliderMark, _SliderThumb, _SliderValue Label).
+ * Figma naming (the opposite of the usual convention, mirrored as-is):
+ *   _SliderTrack = full-width bar behind, 6px, brand/primary · _SliderRail = filled part up to the thumb, 6px, brand/secondary.
+ * Both rd-80 radius · Marks 6×6 background/primary/default · Thumb 24 circle, 2px brand/primary ring,
+ * background/primary/contrast centre · Value labels body-sm/regular.
+ * As in Figma, the thumb stays inside the bar (its centre travels from thumb/2 to 100% − thumb/2), and marks (one per step,
+ * both ends included) are spread evenly from the left edge to the right edge of the bar.
  * A native <input type="range"> sits on top for dragging, keyboard and screen readers; only its thumb is visible.
  */
 .root {
   --thumb: 24px;
-  --rail: 4px;
-  --track: 6px;
-  --rail-color: var(--color-brand-secondary-default);
-  --track-color: var(--color-brand-primary-default);
+  --bar: 6px;
+  --mark: 6px;
+  --track-color: var(--color-brand-primary-default); /* full bar */
+  --rail-color: var(--color-brand-secondary-default); /* filled part */
+  --thumb-color: var(--color-brand-primary-default);
   display: flex;
   flex-direction: column;
   gap: var(--sizes-spacing-sp-8);
   width: 100%;
 }
 .root[data-disabled='true'] {
-  --rail-color: var(--color-status-disabled-bg);
-  --track-color: var(--color-status-disabled-on-transparent);
+  --track-color: var(--color-status-disabled-bg);
+  --rail-color: var(--color-status-disabled-on-transparent);
+  --thumb-color: var(--color-status-disabled-on-transparent);
 }
 
 .control {
@@ -25,32 +31,32 @@
   height: var(--thumb);
 }
 
-.rail,
-.track {
+.track,
+.rail {
   position: absolute;
   left: 0;
-  border-radius: 100px;
+  top: calc((var(--thumb) - var(--bar)) / 2);
+  height: var(--bar);
+  border-radius: var(--sizes-radius-rd-80);
   pointer-events: none;
 }
-.rail {
-  top: calc((var(--thumb) - var(--rail)) / 2);
-  width: 100%;
-  height: var(--rail);
-  background: var(--rail-color);
-}
+/* Figma _SliderTrack: the full-width bar. */
 .track {
-  top: calc((var(--thumb) - var(--track)) / 2);
-  /* thumb centre travels from thumb/2 to 100% - thumb/2 */
-  width: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--pct));
-  height: var(--track);
+  width: 100%;
   background: var(--track-color);
 }
+/* Figma _SliderRail: the filled part, ending at the thumb's centre. */
+.rail {
+  width: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--pct));
+  background: var(--rail-color);
+}
+/* Figma _SliderMark: 6×6 square. First mark flush with the left edge, last flush with the right edge. */
 .mark {
   position: absolute;
-  top: calc((var(--thumb) - 4px) / 2);
-  left: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--at) - 2px);
-  width: 4px;
-  height: 4px;
+  top: calc((var(--thumb) - var(--mark)) / 2);
+  left: calc((100% - var(--mark)) * var(--at));
+  width: var(--mark);
+  height: var(--mark);
   background: var(--color-background-primary-default);
   pointer-events: none;
 }
@@ -66,6 +72,7 @@
   -webkit-appearance: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y; /* horizontal drags move the thumb, vertical ones still scroll the page */
 }
 .input:disabled {
   cursor: not-allowed;
@@ -83,7 +90,7 @@
   width: var(--thumb);
   height: var(--thumb);
   border-radius: 50%;
-  border: var(--sizes-border-br-2) solid var(--track-color);
+  border: var(--sizes-border-br-2) solid var(--thumb-color);
   background: var(--color-background-primary-contrast);
   box-sizing: border-box;
 }
@@ -91,7 +98,7 @@
   width: var(--thumb);
   height: var(--thumb);
   border-radius: 50%;
-  border: var(--sizes-border-br-2) solid var(--track-color);
+  border: var(--sizes-border-br-2) solid var(--thumb-color);
   background: var(--color-background-primary-contrast);
   box-sizing: border-box;
 }
@@ -113,6 +120,7 @@
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
   color: var(--color-foreground-primary-default);
+  font-variant-numeric: tabular-nums; /* the live value doesn't jitter while dragging */
 }
 .root[data-disabled='true'] .values {
   color: var(--color-status-disabled-on-transparent);

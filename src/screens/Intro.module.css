@@ -1,0 +1,101 @@
+/* Figma "↳ Slider" (402×874). Collage coordinates are relative to a 370-wide box. */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.skip {
+  min-width: 120px;
+}
+
+.slide {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+/* Photo collage: three cards, two tilted behind a larger front card. */
+.collage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 370 / 351;
+  max-height: 351px;
+  margin-top: var(--sizes-spacing-sp-48);
+  animation: fade-in 320ms ease both;
+}
+.card {
+  position: absolute;
+  margin: 0;
+  padding: 1.5px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--color-neutral-white) 90%, transparent), color-mix(in srgb, var(--color-neutral-white) 40%, transparent));
+  translate: -50% -50%;
+}
+.backLeft {
+  left: calc(110 / 370 * 100%);
+  top: calc(110 / 351 * 100%);
+  width: calc(180 / 370 * 100%);
+  rotate: -15deg;
+}
+.backRight {
+  left: calc(259 / 370 * 100%);
+  top: calc(150 / 351 * 100%);
+  width: calc(180 / 370 * 100%);
+  rotate: 15deg;
+}
+.front {
+  left: calc(187.5 / 370 * 100%);
+  top: calc(231.5 / 351 * 100%);
+  width: calc(239 / 370 * 100%);
+  padding: 2px;
+  border-radius: 32px;
+}
+.photo,
+.placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  /* Matches the photo's own rounded corners from Figma (24 at 177px) so no light corners show. */
+  border-radius: 24px;
+  object-fit: cover;
+}
+.front .photo,
+.front .placeholder {
+  border-radius: 30px;
+}
+.placeholder {
+  background: linear-gradient(135deg, var(--color-stormy-teal-300), var(--color-blue-300));
+}
+
+.bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-40);
+  padding-top: var(--sizes-spacing-sp-24);
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sizes-spacing-sp-16);
+  animation: fade-in 320ms ease both;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sizes-spacing-sp-8);
+}
+.cta {
+  flex: 1 1 auto;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}

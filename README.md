@@ -3,6 +3,38 @@
 Design tokens for the Runion design system, generated from the Figma file **Runion**,
 plus the custom React + TypeScript components the prototype is built from (step 2). Screens come next.
 
+## Prototype (step 3): onboarding flow
+
+```bash
+npm run dev
+```
+
+Open http://127.0.0.1:5173/. On a laptop it shows a 402×874 phone-sized screen; on a phone it fills the screen.
+The component gallery is at http://127.0.0.1:5173/#/gallery.
+
+| Screen | Link | Figma page |
+|---|---|---|
+| Splash (full logo → short logo, tap to skip) | `#/` | ↳ Intro |
+| Intro slides 1–3 (swipe, arrows, Skip, Get started) | `#/intro/1` … `#/intro/3` | ↳ Slider |
+| Log in / Sign up tabs | `#/auth/login`, `#/auth/signup` | ↳ Log in / Sign up |
+| Email code (sign up only; 6 boxes, resend after 60 s) | `#/verify` | ↳ Sign up - Validation code |
+| Profile setup 1/4 – 3/4, then review 4/4 (avatar + one card per step with "Edit", Back / Create) | `#/profile/1` … `#/profile/4` | ↳ User-profile configuration |
+| All set (no longer in the flow) | `#/done` | not in Figma |
+| Home placeholder (after log in, with Log out) | `#/home` | not in Figma yet (design to come) |
+
+**Flow:** Log in (email or Google) → Home placeholder. Sign up with email → code → profile 1–3 → review → Create → Home placeholder. Sign up with Google → profile 1–3 → review → Create → Home placeholder.
+
+**Behaviour (no real backend):** any valid-looking email continues; any 6-digit code is accepted; "with Google" is simulated.
+"Use my current location" fills a sample value instead of asking the browser.
+Profile step 1: first name, last name, gender and running area are required; "Next" shows an error under each missing one.
+The photo is optional: without one, the avatar shows the initials of first + last name, or the user icon while both are empty.
+What the tester types stays in that browser tab only (`sessionStorage`), and the profile photo stays in memory; nothing is sent anywhere.
+"Log out" on Home clears it all.
+
+**Assets from Figma:** logo (Full, Short, White) as SVG; the 9 intro photos as JPEG (straightened, since Figma exports them tilted).
+Not from Figma: the white Short logo (made from the White logo's colour) and the Google "G" (standard Google sign-in mark, because the Figma export failed).
+**Sample content not in Figma:** the other options in the Gender, Pace and Distance lists (Figma shows one selected value each).
+
 ## Components (step 2)
 
 ```bash
@@ -42,9 +74,10 @@ Remove the override once Storybook ships with 0.9.1 or later.
 | `Tabs`, `TabPanel` | `src/components/Tabs` | standard / scrollable / fullWidth · icon left / up / right · arrow keys, Home/End |
 | `FormField`, `TextField`, `PasswordField`, `TextArea`, `Select`, `FormLabel`, `FormHelperText` | `src/components/FormField` | label + helper above, message below · error / success / disabled · large / medium |
 | `Divider` | `src/components/Divider` | horizontal / vertical |
-| `Slider` | `src/components/Slider` | native range input · optional step marks · min/max labels |
+| `Slider` | `src/components/Slider` | native range input · optional step marks · left label = live value (Figma "Active"), right label = max · thumb stays inside the bar · marks at every step, ends included |
 | `Checkbox`, `FormControlLabel`, `FormGroup` | `src/components/Checkbox` | checked / indeterminate / disabled · label start/end · group error / disabled |
 | `MobileStepper` | `src/components/MobileStepper` | dots (back/next) or text |
+| `Avatar`, `getInitials` | `src/components/Avatar` | photo → initials → user icon (also if the photo fails to load) · circular / rounded / square · 24–120px · optional success badge |
 
 - **No UI library.** Styling uses only the variables in `tokens/tokens.css` (CSS modules per component).
 - **Icons:** [Phosphor Icons](https://phosphoricons.com) via `@phosphor-icons/react` (MIT), the same set the Figma file uses.
@@ -53,15 +86,21 @@ Remove the override once Storybook ships with 0.9.1 or later.
 ### Where the code differs from Figma on purpose
 - **Checkbox disabled:** Figma keeps the enabled icon colour; code uses `status/disabled/on-transparent` so it reads as unavailable.
 - **Tabs on phones:** Full Width tabs use 8px side padding instead of 28px so 4 tabs fit at 375px; Standard tabs scroll when they don't fit. (Figma has no small-screen variant for these.)
-- **Slider:** only the Medium size is built; Small and disabled colours weren't defined in Figma, so disabled uses the disabled tokens.
+- **Slider:** only the single-value Medium slider is built (no range / two thumbs, no Small size). Figma has no disabled variants, so disabled uses the disabled tokens. Figma has no hover/focus states for the thumb; keyboard focus adds an outline so the slider stays usable without a mouse.
 - **MobileStepper dots:** the active dot is filled and the others outlined; in Figma all dots look the same.
-- **Text field clear icon:** a Phosphor `X`; the exact glyph in Figma wasn't identified.
 
 ### Figma quirks mirrored as-is
 - IconButton Ghost + Secondary uses the default foreground colour (Button Ghost + Secondary uses brand/secondary).
 - Text field placeholder is `body-sm`, smaller than the `body-md` value text.
 - Checkbox Small / Medium / Large are all 28×28 in Figma, so the code has no size option.
+- Avatar Rounded (4) and Square (0) corner radii are raw values in Figma, not radius tokens (Circular uses `rd-80`).
+- Slider: Figma names the full-width bar `_SliderTrack` (brand/primary) and the filled part `_SliderRail` (brand/secondary), the opposite of the usual convention; the code uses the same names and colours.
+- Avatar badge sizes are raw values in Figma (ring 8 / 12 / 24 / 32 px; the 24px avatar has no ring).
 
+### Avatar badge position (code follows the pattern, Figma has outliers)
+Code: Circular → the badge's outer corner sits on the avatar's corner; Rounded / Square → the badge is centred on the corner.
+Figma variants that don't follow it: Circular 24 / 32 / 60, Rounded and Square 60, the 24px Icon variants, the Image variants,
+and a few half-pixel offsets (32px Icon, 120px). Align them in Figma and the code needs no change.
 ## Files
 
 | Path | What it is | Edit? |
@@ -124,13 +163,9 @@ The build never corrects names or values. It only applies the translations CSS n
 - progressive blurs become a blur plus a gradient mask (an approximation, see Caveats)
 
 Known inconsistencies are detected on every build and listed in the preview and in `tokens.json` → `issues`.
-As of the latest 2026-11-12 export, there are **no errors**:
+As of the latest 2026-11-13 export, there are **no issues** (0 error, 0 warn, 0 info).
 
-| Severity | Issue |
-|---|---|
-| info | `String-text` ("&lt;AvatarGroup&gt;") skipped: not a design token (kept on purpose) |
-
-Fixed in Figma since the first export: `rd-16` (now 16px), `color/200` (now `neutral/200`), `body-xxs/*` renamed to `body-xs/*`,
+Fixed in Figma since the first export: `String-text` ("&lt;AvatarGroup&gt;", not a design token) removed, `rd-16` (now 16px), `color/200` (now `neutral/200`), `body-xxs/*` renamed to `body-xs/*`,
 and `neutral/600` (now `#475569`, so it no longer duplicates `neutral/500`).
 The `typography` font family and weight variables now alias the `base` ones (`type/font family/body`, `type/font weight/*`),
 so `base` is the single source for fonts: change a font or weight there only.

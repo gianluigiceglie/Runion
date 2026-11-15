@@ -1,0 +1,24 @@
+.wrap {
+  display: inline-flex;
+}
+.img {
+  display: block;
+  width: auto;
+}
+.dark {
+  display: none;
+}
+:global([data-theme='dark']) .light {
+  display: none;
+}
+:global([data-theme='dark']) .dark {
+  display: block;
+}
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .light {
+    display: none;
+  }
+  :global(:root:not([data-theme='light'])) .dark {
+    display: block;
+  }
+}

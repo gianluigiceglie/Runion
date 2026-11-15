@@ -1,0 +1,116 @@
+/* Figma "↳ User-profile configuration": intro (gap 8), then the step form (gap 24), sections gap 16. */
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-8);
+}
+.title,
+.subtitle,
+.section {
+  margin: 0;
+}
+.form {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-24);
+  margin-top: var(--sizes-spacing-sp-16);
+}
+.photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sizes-spacing-sp-8); /* Figma "Label+Profile-image-upload": label → avatar 8px, no padding */
+}
+.photo > :first-child {
+  align-self: stretch;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sizes-spacing-sp-16);
+}
+.areaField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-4); /* same 4px as a FormField message (2px gap + 2px margin) */
+}
+.fieldAction {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--sizes-spacing-sp-8);
+}
+.fieldAction > :first-child {
+  flex: 1 1 auto;
+}
+.slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-16);
+}
+
+/*
+ * Figma "Container-button" (all steps): 84px tall, full screen width, background/primary/translucent, buttons centred
+ * with 16px sides and an 8px gap. Stays at the bottom of the screen while the content scrolls behind it.
+ */
+.actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  margin: auto calc(-1 * var(--sizes-spacing-sp-16)) calc(-1 * var(--screen-bottom, 24px));
+  padding: 0 var(--sizes-spacing-sp-16) calc(var(--screen-bottom, 24px) - var(--sizes-spacing-sp-24));
+  min-height: 84px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--sizes-spacing-sp-8);
+  background: var(--color-background-primary-translucent);
+}
+.actions > * {
+  flex: 1 1 0;
+}
+
+/* Figma step 4/4 (review). */
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-16);
+}
+.reviewAvatar {
+  display: flex;
+  justify-content: center;
+  min-height: 124px; /* Figma "Avatar-container": 124px tall, 120px avatar centred at the top */
+}
+/* Figma "Cotainer-values": padding 8, gap 4, translucent background, rd-16. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-4);
+  padding: var(--sizes-spacing-sp-8);
+  border-radius: var(--sizes-radius-rd-16);
+  background: var(--color-background-primary-translucent);
+}
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sizes-spacing-sp-4);
+}
+.list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-4);
+}
+/* Figma "Label+Value": label over value, gap 4, both foreground/primary/default. */
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-4);
+}
+.item dt,
+.item dd {
+  margin: 0;
+  color: var(--color-foreground-primary-default);
+  overflow-wrap: anywhere;
+}

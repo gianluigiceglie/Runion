@@ -1,0 +1,29 @@
+/*
+ * ScreenBackground — mirrors Figma "Background" (Runion): the screen colour plus large blurred circles
+ * in the status "bg" tokens, so it follows light/dark mode. Figma layer blur 300 ≈ CSS blur(150px).
+ * Positions are % of the 402×874 Figma frame so the look scales with the screen.
+ */
+.root {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--color-background-primary-default);
+  pointer-events: none;
+}
+.blob {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(150px);
+  transition: background-color 400ms ease;
+}
+.info {
+  background: var(--color-status-info-bg);
+}
+.warning {
+  background: var(--color-status-warning-bg);
+}
+.success {
+  background: var(--color-status-success-bg);
+}

@@ -21,3 +21,4 @@ export { Divider, type DividerProps } from './Divider/Divider';
 export { Slider, type SliderProps } from './Slider/Slider';
 export { Checkbox, FormControlLabel, FormGroup, type CheckboxProps, type FormControlLabelProps, type FormGroupProps } from './Checkbox/Checkbox';
 export { MobileStepper, type MobileStepperProps } from './MobileStepper/MobileStepper';
+export { Avatar, getInitials, type AvatarProps, type AvatarSize, type AvatarVariant, type AvatarContent } from './Avatar/Avatar';

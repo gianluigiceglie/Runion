@@ -1,6 +1,6 @@
 /*
  * Runion foundation tokens — GENERATED, do not edit by hand.
- * Source: Figma "Runion" (exported 2026-11-12)
+ * Source: Figma "Runion" (exported 2026-11-13)
  * Rebuild: npm run tokens
  *
  * Themes: follows the OS setting by default. Force one with data-theme="light" | "dark"
@@ -129,8 +129,8 @@
   --line-height-body-lg: var(--scale-26);
   --line-height-body-md: var(--scale-24);
   --line-height-body-sm: var(--scale-22);
-  --line-height-body-xs: var(--scale-20);
   --paragraph-spacing-heading-h1: var(--scale-18);
+  --line-height-body-xs: var(--scale-20);
   --line-height-body-xxs: var(--scale-18);
   --paragraph-spacing-heading-h2: var(--scale-18);
   --paragraph-spacing-heading-h3: var(--scale-18);

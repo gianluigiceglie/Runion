@@ -1,0 +1,23 @@
+/* Figma "↳ Log in / Sign up": heading block (gap 8), then tabs + panel 48 below; content centred. */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-48);
+}
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-8);
+}
+.strong {
+  font-weight: var(--font-weight-semi-bold);
+}
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+/* Figma <TabPanel>: padding 16, rd-24 */
+.panel {
+  padding: var(--sizes-spacing-sp-16);
+  border-radius: var(--sizes-radius-rd-24);
+}

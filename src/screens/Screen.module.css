@@ -1,0 +1,58 @@
+/*
+ * Shared screen layout (Figma "Body"): padding 62 top (status bar) / 16 sides / 24 bottom.
+ * --screen-top / --screen-bottom come from the app frame (smaller on real phones, plus safe areas).
+ */
+.screen {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.body {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--screen-top, 62px) var(--sizes-spacing-sp-16) var(--screen-bottom, 24px);
+}
+.center {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.footer {
+  margin-top: auto;
+  padding-top: var(--sizes-spacing-sp-24);
+  display: flex;
+  gap: var(--sizes-spacing-sp-8);
+}
+.footer > * {
+  flex: 1 1 0;
+}
+.h1 {
+  margin: 0;
+  text-align: center;
+}
+.h2 {
+  margin: 0;
+  text-align: center;
+  text-wrap: balance;
+}
+.lead {
+  margin: 0;
+  text-align: center;
+  text-wrap: balance;
+}
+.stack16 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-16);
+}
+.stack24 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sizes-spacing-sp-24);
+}

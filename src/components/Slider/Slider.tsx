@@ -9,9 +9,13 @@ export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   value?: number;
   defaultValue?: number;
   onChange?: (value: number) => void;
-  /** Show a mark at every step (Figma _SliderMark). */
+  /** Show a mark at every step, both ends included (Figma _SliderMark). */
   marks?: boolean;
-  /** Labels under the slider, left and right (Figma "Values" row). Defaults to min and max. */
+  /**
+   * Labels under the slider (Figma "Values" row).
+   * Left: the current value, updating while the thumb moves (Figma _SliderValue Label Active=true). Right: the maximum.
+   * Pass `minLabel` / `maxLabel` to replace them.
+   */
   minLabel?: ReactNode;
   maxLabel?: ReactNode;
   showValues?: boolean;
@@ -21,6 +25,13 @@ export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   formatValue?: (value: number) => string;
 }
 
+/**
+ * A slider is an interactive form control that allows users to select a single value or a continuous range of values
+ * by moving a draggable thumb along a horizontal track.
+ *
+ * (Figma "<Slider>" description.) Built: single value, Medium size. The value under the left end updates while dragging.
+ * Not built yet: range (two thumbs) and the Small size (_SliderTrack / _SliderRail Size=Small, 2px).
+ */
 export function Slider({
   min = 0,
   max = 100,
@@ -42,15 +53,19 @@ export function Slider({
   const current = controlled ? value : inner;
   const pct = max > min ? (current - min) / (max - min) : 0;
   const markCount = marks && step > 0 ? Math.floor((max - min) / step) : 0;
+  const format = (v: number) => (formatValue ? formatValue(v) : String(v));
 
   return (
     <div className={cx(styles.root, className)} data-disabled={disabled ? 'true' : undefined}>
       <div className={styles.control} style={{ '--pct': pct } as CSSProperties}>
-        <span className={styles.rail} />
-        {Array.from({ length: Math.max(0, markCount - 1) }, (_, i) => (
-          <span key={i} className={styles.mark} style={{ '--at': (i + 1) / markCount } as CSSProperties} />
-        ))}
+        {/* Figma layer order: _SliderTrack (full bar), _SliderRail (filled part), then the marks on top. */}
         <span className={styles.track} />
+        <span className={styles.rail} />
+        {/* One mark per step, both ends included (Figma: 2–10 in steps of 2 → 5 marks). */}
+        {markCount > 0 &&
+          Array.from({ length: markCount + 1 }, (_, i) => (
+            <span key={i} className={styles.mark} style={{ '--at': i / markCount } as CSSProperties} />
+          ))}
         <input
           type="range"
           className={styles.input}
@@ -59,7 +74,7 @@ export function Slider({
           step={step}
           value={current}
           disabled={disabled}
-          aria-valuetext={formatValue ? formatValue(current) : undefined}
+          aria-valuetext={format(current)}
           onChange={(e) => {
             const v = Number(e.target.value);
             if (!controlled) setInner(v);
@@ -69,9 +84,10 @@ export function Slider({
         />
       </div>
       {showValues && (
+        // Hidden from screen readers: the input already announces its value (aria-valuetext).
         <div className={styles.values} aria-hidden="true">
-          <span>{minLabel ?? (formatValue ? formatValue(min) : min)}</span>
-          <span>{maxLabel ?? (formatValue ? formatValue(max) : max)}</span>
+          <span>{minLabel ?? format(current)}</span>
+          <span>{maxLabel ?? format(max)}</span>
         </div>
       )}
     </div>

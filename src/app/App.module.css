@@ -1,0 +1,48 @@
+/*
+ * Prototype frame. Laptop/desktop: a 402×874 phone-sized screen centred on the page (Figma frame size).
+ * Phone (≤ 500px wide): full screen, respecting the notch / home-bar safe areas.
+ */
+.stage {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sizes-spacing-sp-16);
+  background: var(--color-background-primary-contrast);
+}
+.device {
+  /* Top padding of the screens: Figma leaves 62px for the phone status bar. */
+  --screen-top: 62px;
+  --screen-bottom: 24px;
+  position: relative;
+  width: 402px;
+  height: min(874px, calc(100dvh - 32px));
+  border-radius: 40px;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 0 0 var(--sizes-border-br-1) var(--color-background-primary-high-contrast);
+  background: var(--color-background-primary-default);
+}
+.scroll {
+  position: absolute;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+@media (max-width: 500px) {
+  .stage {
+    display: block;
+    padding: 0;
+  }
+  .device {
+    --screen-top: calc(var(--sizes-spacing-sp-16) + env(safe-area-inset-top, 0px));
+    --screen-bottom: calc(var(--sizes-spacing-sp-24) + env(safe-area-inset-bottom, 0px));
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
